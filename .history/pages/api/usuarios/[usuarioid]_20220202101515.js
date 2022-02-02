@@ -1,4 +1,4 @@
-import dbConnect from "../../../services/db"
+import dbConnect from "../../services/db"
 import Usuario from "../../api/models/Usuario"
 
 dbConnect()
