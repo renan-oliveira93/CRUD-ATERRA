@@ -11,17 +11,15 @@ import {
   Tr,
   Th,
   Td,
-  VStack,    
+  VStack,
+  FormErrorMessage,  
  } from '@chakra-ui/react'
 import { Button } from '@chakra-ui/react'
-import { useEffect } from 'react';
 import { useState } from 'react/cjs/react.development'
 import api from './services/api';
 
 
 export default function Home() {
-  
-  //funções de armazenamento de dados
   const [usuarios, setUsuarios] = useState ([]); 
   const [id, setId] = useState (null);
 
@@ -34,7 +32,26 @@ export default function Home() {
   const [telefone, setTelefone] = useState ('');
   console.log({telefone})
 
-  //funções que controlam os eventos nos imputs 
+  const erro = null
+  const [erros, setErros] = useState ({name:null, email:null, telefone:null});
+  
+  const validacao = () =>{
+    if(!name) {
+      setErros({name:'Campo obrigatório'}) 
+      return false
+    }
+    if(!email) {
+      setErros({email:'Campo obrigatório'}) 
+      return false
+    }
+    if(!name) {
+      setErros({telefone:'Campo obrigatório'})
+      return false
+    }
+    setErros({})
+    return true
+  } 
+  
   const handleChangeName = (text) =>{
     setName(text)
   }
@@ -46,16 +63,16 @@ export default function Home() {
   const handleChangeTelefone = (text) =>{
     setTelefone(text)
   }
-  
-  //função que controla o botão de submit
-  const handleSubmit = async (event) => {
-    event.preventDefault()    
-    
-    try{
-      const response = await api.post('/usuarios', {name, email, telefone})
-      console.log(response)
 
-      setUsuarios(usuarios.concat(data.data))
+  const handleSubmit = async (event) => {
+    event.preventDefault() 
+    
+    if(!validacao()) return
+
+    try{
+      await api.post('/usuarios')
+
+      setUsuarios(usuarios.concat({_id: new Date().getMilliseconds().toString() ,name, email, telefone}))
 
       setName('')
       setEmail('')
@@ -65,43 +82,23 @@ export default function Home() {
     }    
     
   }
-  
-  //função para trazer usuarios do banco de dados e imprimir na tela
-  useEffect(() => {
-    api.get('/usuarios').then(({data}) => {
-      setUsuarios(data.data)
-    })
-  }, [])
-  
-  //função de controle do delete
-  const handleDelete = async (_id) =>{
-    try{
-      await api.delete(`/usuarios/${_id}`)
 
-      setUsuarios(usuarios.filter(usuario => usuario._id !== _id))
-    }catch(err){
-      console.log(err)
-    }
-           
+  const handleDelete = (_id) =>{
+    setUsuarios(usuarios.filter(usuario => usuario._id !== _id))       
   } 
-  
-  //funções de controle de update
-  const handleUpdate = async (event) => {
-    event.preventDefault()  
+
+  const handleUpdate = (event) => {
+    event.preventDefault() 
     
-    try {
-      await api.put(`/usuarios/${id}`, {name, email, telefone})
-      setUsuarios(usuarios.map(usuario => usuario._id === id ?{name, email, telefone, _id : id} : usuario))
+    if(!validacao()) return
+    
+    setUsuarios(usuarios.map(usuario => usuario._id === id ?{name, email, telefone, _id : id} : usuario))
 
     setName('')
     setEmail('')
     setTelefone('')
     setId(null)
-    } catch (err) {
-      console.log(err)
-    }       
   }
-
   const handleUpdateSubmit = (usuario) => {    
     setId(usuario._id)
     setName(usuario.name)
@@ -118,39 +115,43 @@ export default function Home() {
       </Flex>
       
       <VStack marginy='1rem' as='form' onSubmit={id ? handleUpdate : handleSubmit}>
-        <FormControl>
+        <FormControl isInvalid={!!erro}>
           <FormLabel >Nome:</FormLabel>
             <Input  
             type='text'
-            value={name}            
+            value={name}
+            erro={erros.name}
             onChange={event => handleChangeName(event.target.value)}           
             /> 
-                   
+            {!!erro && <FormErrorMessage>{erro}</FormErrorMessage>}       
         </FormControl>
 
-        <FormControl>
+        <FormControl isInvalid={!!erro}>
           <FormLabel>Email:</FormLabel>
             <Input  
             type='email' 
-            value={email}            
+            value={email}
+            erro={erros.email}
             onChange={event => handleChangeEmail(event.target.value)}
             /> 
-                  
+            {!!erro && <FormErrorMessage>{erro}</FormErrorMessage>}       
         </FormControl> 
 
-        <FormControl>
+        <FormControl isInvalid={!!erro}>
           <FormLabel >Telefone:</FormLabel>
             <Input 
             type='tel:'
-            value={telefone}            
+            value={telefone}
+            erro={erros.telefone}
             onChange={event => handleChangeTelefone(event.target.value)}
             />   
-                
+            {!!erro && <FormErrorMessage>{erro}</FormErrorMessage>}     
         </FormControl> 
 
         <Button fontSize='sm' margin='1rem' alignself='flex-end' colorScheme='gray' type='submit'>{id? 'Atualizar' : 'Adicionar'}</Button>
 
       </VStack>
+
      
       <Table variant='simple'>
                

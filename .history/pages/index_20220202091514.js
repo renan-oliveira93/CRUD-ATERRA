@@ -20,8 +20,6 @@ import api from './services/api';
 
 
 export default function Home() {
-  
-  //funções de armazenamento de dados
   const [usuarios, setUsuarios] = useState ([]); 
   const [id, setId] = useState (null);
 
@@ -34,7 +32,7 @@ export default function Home() {
   const [telefone, setTelefone] = useState ('');
   console.log({telefone})
 
-  //funções que controlam os eventos nos imputs 
+   
   const handleChangeName = (text) =>{
     setName(text)
   }
@@ -46,8 +44,7 @@ export default function Home() {
   const handleChangeTelefone = (text) =>{
     setTelefone(text)
   }
-  
-  //função que controla o botão de submit
+
   const handleSubmit = async (event) => {
     event.preventDefault()    
     
@@ -66,42 +63,26 @@ export default function Home() {
     
   }
   
-  //função para trazer usuarios do banco de dados e imprimir na tela
   useEffect(() => {
     api.get('/usuarios').then(({data}) => {
       setUsuarios(data.data)
     })
   }, [])
-  
-  //função de controle do delete
-  const handleDelete = async (_id) =>{
-    try{
-      await api.delete(`/usuarios/${_id}`)
 
-      setUsuarios(usuarios.filter(usuario => usuario._id !== _id))
-    }catch(err){
-      console.log(err)
-    }
-           
+  const handleDelete = (_id) =>{
+    setUsuarios(usuarios.filter(usuario => usuario._id !== _id))       
   } 
-  
-  //funções de controle de update
-  const handleUpdate = async (event) => {
-    event.preventDefault()  
-    
-    try {
-      await api.put(`/usuarios/${id}`, {name, email, telefone})
-      setUsuarios(usuarios.map(usuario => usuario._id === id ?{name, email, telefone, _id : id} : usuario))
+
+  const handleUpdate = (event) => {
+    event.preventDefault()    
+        
+    setUsuarios(usuarios.map(usuario => usuario._id === id ?{name, email, telefone, _id : id} : usuario))
 
     setName('')
     setEmail('')
     setTelefone('')
     setId(null)
-    } catch (err) {
-      console.log(err)
-    }       
   }
-
   const handleUpdateSubmit = (usuario) => {    
     setId(usuario._id)
     setName(usuario.name)

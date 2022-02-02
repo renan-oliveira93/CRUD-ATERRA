@@ -90,7 +90,6 @@ export default function Home() {
     event.preventDefault()  
     
     try {
-      await api.put(`/usuarios/${id}`, {name, email, telefone})
       setUsuarios(usuarios.map(usuario => usuario._id === id ?{name, email, telefone, _id : id} : usuario))
 
     setName('')
@@ -101,7 +100,7 @@ export default function Home() {
       console.log(err)
     }       
   }
-
+  
   const handleUpdateSubmit = (usuario) => {    
     setId(usuario._id)
     setName(usuario.name)

@@ -86,22 +86,16 @@ export default function Home() {
   } 
   
   //funções de controle de update
-  const handleUpdate = async (event) => {
-    event.preventDefault()  
-    
-    try {
-      await api.put(`/usuarios/${id}`, {name, email, telefone})
-      setUsuarios(usuarios.map(usuario => usuario._id === id ?{name, email, telefone, _id : id} : usuario))
+  const handleUpdate = (event) => {
+    event.preventDefault()    
+        
+    setUsuarios(usuarios.map(usuario => usuario._id === id ?{name, email, telefone, _id : id} : usuario))
 
     setName('')
     setEmail('')
     setTelefone('')
     setId(null)
-    } catch (err) {
-      console.log(err)
-    }       
   }
-
   const handleUpdateSubmit = (usuario) => {    
     setId(usuario._id)
     setName(usuario.name)
