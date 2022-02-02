@@ -18,7 +18,7 @@ import {
 import { Button } from '@chakra-ui/react'
 import axios from 'axios';
 import { useEffect,useState } from 'react';
-//import api from '../services/api';
+import api from '../services/api';
 
 
 
@@ -80,7 +80,7 @@ export default function Home() {
   //função de controle do delete
   const handleDelete = async (_id) =>{
     try{
-      await axios.delete(`/api/usuarios/${_id}`)
+      await api.delete(`/usuarios/${_id}`)
 
       setUsuarios(usuarios.filter(usuario => usuario._id !== _id))
     }catch(err){
@@ -94,7 +94,7 @@ export default function Home() {
     event.preventDefault()  
     
     try {
-      await axios.put(`/api/usuarios/${id}`, {name, email, telefone})
+      await api.put(`/usuarios/${id}`, {name, email, telefone})
       setUsuarios(usuarios.map(usuario => usuario._id === id ?{name, email, telefone, _id : id} : usuario))
 
     setName('')
