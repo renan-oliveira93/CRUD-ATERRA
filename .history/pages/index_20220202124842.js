@@ -115,18 +115,18 @@ export default function Home() {
   return ( 
     <Box margin='5rem' >
       <Menu>
-          <MenuItem         
-            fontFamily={'sans-serif'}
+          <MenuButton
+            px={4}
+            py={2}
+            transition='all 0.2s'
             borderRadius='md'
             borderWidth='1px'
-            bgColor={'green'}
-            color={'white'}
-            fontSize={'3xl'}
+            _hover={{ bg: 'gray.400' }}
             _expanded={{ bg: 'blue.400' }}
             _focus={{ boxShadow: 'outline' }}
           >
-          aterra
-  </MenuItem>
+          File 
+  </MenuButton>
   
 </Menu>
     

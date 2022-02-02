@@ -113,23 +113,10 @@ export default function Home() {
   }
 
   return ( 
-    <Box margin='5rem' >
+    <Box margin='10rem' >
       <Menu>
-          <MenuItem         
-            fontFamily={'sans-serif'}
-            borderRadius='md'
-            borderWidth='1px'
-            bgColor={'green'}
-            color={'white'}
-            fontSize={'3xl'}
-            _expanded={{ bg: 'blue.400' }}
-            _focus={{ boxShadow: 'outline' }}
-          >
-          aterra
-  </MenuItem>
-  
-</Menu>
-    
+        <MenuItem>aterra</MenuItem>
+      </Menu>
       <Flex color='white' justifyContent='space-between' >
           <Text color='black' fontSize='2xl'>Usuários</Text>          
       </Flex>

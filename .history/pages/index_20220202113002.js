@@ -11,9 +11,7 @@ import {
   Tr,
   Th,
   Td,
-  VStack,
-  Menu,
-  MenuItem,    
+  VStack,    
  } from '@chakra-ui/react'
 import { Button } from '@chakra-ui/react'
 import { useEffect } from 'react';
@@ -113,28 +111,13 @@ export default function Home() {
   }
 
   return ( 
-    <Box margin='5rem' >
-      <Menu>
-          <MenuItem         
-            fontFamily={'sans-serif'}
-            borderRadius='md'
-            borderWidth='1px'
-            bgColor={'green'}
-            color={'white'}
-            fontSize={'3xl'}
-            _expanded={{ bg: 'blue.400' }}
-            _focus={{ boxShadow: 'outline' }}
-          >
-          aterra
-  </MenuItem>
-  
-</Menu>
-    
+    <Box margin='10rem' >
+      
       <Flex color='white' justifyContent='space-between' >
           <Text color='black' fontSize='2xl'>Usuários</Text>          
       </Flex>
       
-      <VStack marginy='1rem' as='form' onSubmit={id ? handleUpdate : handleSubmit}>
+      <VStack border='5px' borderColor='black' marginy='1rem' as='form' onSubmit={id ? handleUpdate : handleSubmit}>
         <FormControl>
           <FormLabel >Nome:</FormLabel>
             <Input  

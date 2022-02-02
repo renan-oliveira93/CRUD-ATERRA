@@ -116,7 +116,7 @@ export default function Home() {
     <Box margin='5rem' >
       <Menu>
           <MenuItem         
-            fontFamily={'sans-serif'}
+           // fontFamily={'sans-serif'}
             borderRadius='md'
             borderWidth='1px'
             bgColor={'green'}
