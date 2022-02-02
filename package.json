@@ -11,6 +11,7 @@
     "@chakra-ui/react": "^1.8.1",
     "@emotion/react": "11",
     "@emotion/styled": "11",
+    "@vercel/node": "^1.12.1",
     "axios": "^0.25.0",
     "framer-motion": "5",
     "mongoose": "^6.1.9",
