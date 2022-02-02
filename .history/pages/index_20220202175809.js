@@ -56,7 +56,7 @@ export default function Home() {
     event.preventDefault()    
     
     try{
-      const response = await axios.post('../api/usuarios', {name, email, telefone})
+      const response = await api.post('/usuarios', {name, email, telefone})
       console.log(response)
 
       setUsuarios(usuarios.concat(data.data))

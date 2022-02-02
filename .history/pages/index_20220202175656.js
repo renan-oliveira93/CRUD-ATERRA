@@ -16,7 +16,7 @@ import {
   MenuItem,    
  } from '@chakra-ui/react'
 import { Button } from '@chakra-ui/react'
-import axios from 'axios';
+import { Axios } from 'axios';
 import { useEffect,useState } from 'react';
 import api from '../services/api';
 
@@ -56,7 +56,7 @@ export default function Home() {
     event.preventDefault()    
     
     try{
-      const response = await axios.post('../api/usuarios', {name, email, telefone})
+      const response = await api.post('/usuarios', {name, email, telefone})
       console.log(response)
 
       setUsuarios(usuarios.concat(data.data))
