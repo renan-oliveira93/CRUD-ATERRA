@@ -115,7 +115,7 @@ export default function Home() {
 
   return ( 
     <Box margin='3rem' >
-      <Menu>
+      <Menu margin="3rem">
           <MenuItem         
             fontFamily={'sans-serif'}
             borderRadius='md'
@@ -125,14 +125,13 @@ export default function Home() {
             fontSize={'3xl'}
             _expanded={{ bg: 'blue.400' }}
             _focus={{ boxShadow: 'outline' }}
-            marginBottom='3rem'
           >
           aterra
   </MenuItem>
   
 </Menu>
     
-      <Flex color='white' marginBottom='2rem' justifyContent='space-between' >
+      <Flex color='white' justifyContent='space-between' >
           <Text color='black' fontSize='2xl'>Usuários</Text>          
       </Flex>
       

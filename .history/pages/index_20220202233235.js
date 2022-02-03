@@ -132,7 +132,7 @@ export default function Home() {
   
 </Menu>
     
-      <Flex color='white' marginBottom='2rem' justifyContent='space-between' >
+      <Flex color='white' justifyContent='space-between' >
           <Text color='black' fontSize='2xl'>Usuários</Text>          
       </Flex>
       

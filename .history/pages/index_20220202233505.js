@@ -136,7 +136,7 @@ export default function Home() {
           <Text color='black' fontSize='2xl'>Usuários</Text>          
       </Flex>
       
-      <VStack  as='form' onSubmit={id ? handleUpdate : handleSubmit}>
+      <VStack bgColor='gray' as='form' onSubmit={id ? handleUpdate : handleSubmit}>
         <FormControl>
           <FormLabel >Nome:</FormLabel>
             <Input  

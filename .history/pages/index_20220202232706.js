@@ -125,18 +125,17 @@ export default function Home() {
             fontSize={'3xl'}
             _expanded={{ bg: 'blue.400' }}
             _focus={{ boxShadow: 'outline' }}
-            marginBottom='3rem'
           >
           aterra
   </MenuItem>
   
 </Menu>
     
-      <Flex color='white' marginBottom='2rem' justifyContent='space-between' >
+      <Flex color='white' justifyContent='space-between' >
           <Text color='black' fontSize='2xl'>Usuários</Text>          
       </Flex>
       
-      <VStack  as='form' onSubmit={id ? handleUpdate : handleSubmit}>
+      <VStack marginy='1rem' as='form' onSubmit={id ? handleUpdate : handleSubmit}>
         <FormControl>
           <FormLabel >Nome:</FormLabel>
             <Input  

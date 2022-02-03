@@ -56,9 +56,10 @@ export default function Home() {
     event.preventDefault()    
     
     try{
-      const data = await axios.post('../api/usuarios', {name, email, telefone})      
+      const response = await axios.post('../api/usuarios', {name, email, telefone})
+      console.log(response)
 
-      setUsuarios(usuarios.concat(data.data.data))
+      setUsuarios(data.data)
 
       setName('')
       setEmail('')
@@ -79,7 +80,7 @@ export default function Home() {
   //função de controle do delete
   const handleDelete = async (_id) =>{
     try{
-      await axios.delete(`/api/usuarios/${_id}`)
+      await axios.delete(`/api/usuarios/index.js${_id}`)
 
       setUsuarios(usuarios.filter(usuario => usuario._id !== _id))
     }catch(err){
@@ -114,7 +115,7 @@ export default function Home() {
   }
 
   return ( 
-    <Box margin='3rem' >
+    <Box margin='5rem' >
       <Menu>
           <MenuItem         
             fontFamily={'sans-serif'}
@@ -125,18 +126,17 @@ export default function Home() {
             fontSize={'3xl'}
             _expanded={{ bg: 'blue.400' }}
             _focus={{ boxShadow: 'outline' }}
-            marginBottom='3rem'
           >
           aterra
   </MenuItem>
   
 </Menu>
     
-      <Flex color='white' marginBottom='2rem' justifyContent='space-between' >
+      <Flex color='white' justifyContent='space-between' >
           <Text color='black' fontSize='2xl'>Usuários</Text>          
       </Flex>
       
-      <VStack  as='form' onSubmit={id ? handleUpdate : handleSubmit}>
+      <VStack marginy='1rem' as='form' onSubmit={id ? handleUpdate : handleSubmit}>
         <FormControl>
           <FormLabel >Nome:</FormLabel>
             <Input  

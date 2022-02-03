@@ -125,14 +125,13 @@ export default function Home() {
             fontSize={'3xl'}
             _expanded={{ bg: 'blue.400' }}
             _focus={{ boxShadow: 'outline' }}
-            marginBottom='3rem'
           >
           aterra
   </MenuItem>
   
 </Menu>
     
-      <Flex color='white' marginBottom='2rem' justifyContent='space-between' >
+      <Flex ' justifyContent='space-between' >
           <Text color='black' fontSize='2xl'>Usuários</Text>          
       </Flex>
       
